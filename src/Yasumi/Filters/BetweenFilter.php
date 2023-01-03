@@ -34,11 +34,11 @@ class BetweenFilter extends AbstractFilter
     private string $endDate;
 
     /**
-     * @param Iterator<ProviderInterface> $iterator  iterator object of the Holidays Provider
-     * @param \DateTimeInterface          $startDate start date of the date time span to check against
-     * @param \DateTimeInterface          $endDate   end date of the date time span to check against
-     * @param bool                        $equal     indicates whether the start and end dates should be included in the
-     *                                               comparison
+     * @param \Iterator<ProviderInterface> $iterator  iterator object of the Holidays Provider
+     * @param \DateTimeInterface           $startDate start date of the date time span to check against
+     * @param \DateTimeInterface           $endDate   end date of the date time span to check against
+     * @param bool                         $equal     indicates whether the start and end dates should be included in the
+     *                                                comparison
      */
     public function __construct(
         \Iterator $iterator,
