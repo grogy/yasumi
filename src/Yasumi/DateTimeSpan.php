@@ -59,7 +59,7 @@ class DateTimeSpan implements \Stringable
         }
 
         if ($this->end > (new \DateTimeImmutable($upper))) {
-            throw new InvalidDateTimeSpanException(sprintf('end date needs to be %s or earlier (%s given)', $upper, $this->start->format(self::FORMAT)));
+            throw new InvalidDateTimeSpanException(sprintf('end date needs to be %s or earlier (%s given)', $upper, $this->end->format(self::FORMAT)));
         }
 
         if ($this->start > $this->end) {
