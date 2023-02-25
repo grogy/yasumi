@@ -70,7 +70,7 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
         'IN' => [0], // India
     ];
 
-    /** @var int the object's current year */
+    /** the object's current year */
     protected int $year;
 
     /** the object's current timezone */
@@ -106,7 +106,6 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
         $this->initialize();
     }
 
-    /** {@inheritdoc} */
     public function addHoliday(Holiday $holiday): void
     {
         if ($this->globalTranslations instanceof TranslationsInterface) {
@@ -114,16 +113,14 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
         }
 
         $this->holidays[$holiday->getKey()] = $holiday;
-        uasort($this->holidays, fn (\DateTimeInterface $dateA, \DateTimeInterface $dateB): int => $this::compareDates($dateA, $dateB));
+        uasort($this->holidays, fn (\DateTimeInterface $dateA, \DateTimeInterface $dateB): int => self::compareDates($dateA, $dateB));
     }
 
-    /** {@inheritdoc} */
     public function removeHoliday(string $key): void
     {
         unset($this->holidays[$key]);
     }
 
-    /** {@inheritdoc} */
     public function isWorkingDay(\DateTimeInterface $date): bool
     {
         if ($this->isHoliday($date)) {
@@ -133,14 +130,12 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
         return !$this->isWeekendDay($date);
     }
 
-    /** {@inheritdoc} */
     public function isHoliday(\DateTimeInterface $date): bool
     {
         // Check if given date is a holiday or not
         return \in_array($date->format('Y-m-d'), $this->getHolidayDates(), true);
     }
 
-    /** {@inheritdoc} */
     public function isWeekendDay(\DateTimeInterface $date): bool
     {
         // If no data is defined for this Holiday Provider, the function falls back to the global weekend definition.
@@ -151,7 +146,6 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
         );
     }
 
-    /** {@inheritdoc} */
     public function whenIs(string $key): string
     {
         $this->isHolidayKeyNotEmpty($key); // Validate if key is not empty
@@ -159,7 +153,6 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
         return (string) $this->holidays[$key];
     }
 
-    /** {@inheritdoc} */
     public function whatWeekDayIs(string $key): int
     {
         $this->isHolidayKeyNotEmpty($key); // Validate if key is not empty
@@ -186,31 +179,26 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
         return \count(array_unique($names));
     }
 
-    /** {@inheritdoc} */
     public function getHolidays(): array
     {
         return $this->holidays;
     }
 
-    /** {@inheritdoc} */
     public function getHolidayNames(): array
     {
         return array_keys($this->holidays);
     }
 
-    /** {@inheritdoc} */
     public function getYear(): int
     {
         return $this->year;
     }
 
-    /** {@inheritdoc} */
     public function next(string $key): ?Holiday
     {
         return $this->anotherTime($this->year + 1, $key);
     }
 
-    /** {@inheritdoc} */
     public function getHoliday(string $key): ?Holiday
     {
         $this->isHolidayKeyNotEmpty($key); // Validate if key is not empty
@@ -220,13 +208,11 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
         return $holidays[$key] ?? null;
     }
 
-    /** {@inheritdoc} */
     public function previous(string $key): ?Holiday
     {
         return $this->anotherTime($this->year - 1, $key);
     }
 
-    /** {@inheritdoc} */
     public function between(
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
@@ -239,13 +225,11 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
         return new BetweenFilter($this->getIterator(), $startDate, $endDate, $equals ?? true);
     }
 
-    /** {@inheritdoc} */
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->getHolidays());
     }
 
-    /** {@inheritdoc} */
     public function on(\DateTimeInterface $date): OnFilter
     {
         return new OnFilter($this->getIterator(), $date);
