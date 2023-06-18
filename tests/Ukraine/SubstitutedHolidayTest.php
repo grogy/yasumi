@@ -62,14 +62,14 @@ class SubstitutedHolidayTest extends UkraineBaseTestCase implements HolidayTestC
         string $key,
         int $year,
         \DateTimeInterface $expectedOfficial,
-        \DateTimeInterface $expectedSubstitution = null
+        ?\DateTimeInterface $expectedSubstitution = null
     ): void {
         $holidays = Yasumi::create($provider, $year);
 
         $holidayOfficial = $holidays->getHoliday($key);
         self::assertInstanceOf(Holiday::class, $holidayOfficial);
         self::assertNotNull($holidayOfficial);
-        self::assertEquals($expectedOfficial, $holidayOfficial);
+        $this->assertDateTime($expectedOfficial, $holidayOfficial);
         self::assertTrue($holidays->isHoliday($holidayOfficial));
         self::assertEquals(Holiday::TYPE_OFFICIAL, $holidayOfficial->getType());
 
@@ -81,7 +81,7 @@ class SubstitutedHolidayTest extends UkraineBaseTestCase implements HolidayTestC
             // with substitution
             self::assertNotNull($holidaySubstitution);
             self::assertInstanceOf(SubstituteHoliday::class, $holidaySubstitution);
-            self::assertEquals($expectedSubstitution, $holidaySubstitution);
+            $this->assertDateTime($expectedSubstitution, $holidaySubstitution);
             self::assertTrue($holidays->isHoliday($holidaySubstitution));
             self::assertEquals(Holiday::TYPE_OFFICIAL, $holidaySubstitution->getType());
         }

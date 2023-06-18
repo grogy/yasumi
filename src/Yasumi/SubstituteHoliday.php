@@ -30,6 +30,7 @@ class SubstituteHoliday extends Holiday
 {
     /**
      * @deprecated public access to this property is deprecated in favor of getSubstitutedHoliday()
+     *
      * @see getSubstitutedHoliday()
      */
     public Holiday $substitutedHoliday;
@@ -103,16 +104,18 @@ class SubstituteHoliday extends Holiday
      * @see Holiday::DEFAULT_LOCALE
      * @see Holiday::LOCALE_KEY
      */
-    public function getName(array $locales = null): string
+    public function getName(?array $locales = null): string
     {
         $name = parent::getName();
 
-        if ($name === $this->getKey()) {
-            foreach ($this->getLocales($locales) as $localeList) {
-                $pattern = $this->substituteHolidayTranslations[$localeList] ?? null;
-                if ($pattern) {
-                    return str_replace('{0}', $this->substitutedHoliday->getName(), $pattern);
-                }
+        if ($name !== $this->getKey()) {
+            return $name;
+        }
+
+        foreach ($this->getLocales($locales) as $localeList) {
+            $pattern = $this->substituteHolidayTranslations[$localeList] ?? null;
+            if ($pattern) {
+                return str_replace('{0}', $this->substitutedHoliday->getName(), $pattern);
             }
         }
 
