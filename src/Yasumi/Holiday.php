@@ -60,7 +60,6 @@ class Holiday extends \DateTime implements \JsonSerializable
 
     /**
      * @deprecated Public access to this property is deprecated in favor of getKey()
-     *
      * @see getKey()
      */
     public string $shortName;
@@ -109,7 +108,7 @@ class Holiday extends \DateTime implements \JsonSerializable
         string $type = self::TYPE_OFFICIAL
     ) {
         // Validate if key is not empty
-        if (empty($key)) {
+        if ('' === $key) {
             throw new \InvalidArgumentException('Holiday name can not be blank.');
         }
 
@@ -232,7 +231,7 @@ class Holiday extends \DateTime implements \JsonSerializable
      */
     protected function getLocales(?array $locales): array
     {
-        if (! empty($locales)) {
+        if (null !== $locales && [] !== $locales) {
             $expanded = [];
         } else {
             $locales = [$this->displayLocale];
