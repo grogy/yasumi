@@ -235,7 +235,6 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
         return new OnFilter($this->getIterator(), $date);
     }
 
-    /** {@inheritdoc} */
     public function add(HolidayInterface $holiday): void
     {
         $this->holidays[$holiday->getKey()] = $holiday;

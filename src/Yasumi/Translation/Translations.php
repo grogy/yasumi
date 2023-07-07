@@ -90,13 +90,11 @@ class Translations implements TranslationsInterface
         $this->translations[$key][$locale] = $translation;
     }
 
-    /** {@inheritdoc} */
     public function getTranslation(string $key, string $locale): ?string
     {
         return $this->translations[$key][$locale] ?? null;
     }
 
-    /** {@inheritdoc} */
     public function getTranslations(string $key): array
     {
         return $this->translations[$key] ?? [];
