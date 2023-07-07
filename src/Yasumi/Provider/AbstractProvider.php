@@ -113,7 +113,7 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
         }
 
         $this->holidays[$holiday->getKey()] = $holiday;
-        uasort($this->holidays, fn (\DateTimeInterface $dateA, \DateTimeInterface $dateB): int => self::compareDates($dateA, $dateB));
+        uasort($this->holidays, static fn (\DateTimeInterface $dateA, \DateTimeInterface $dateB): int => self::compareDates($dateA, $dateB));
     }
 
     public function removeHoliday(string $key): void
@@ -127,7 +127,7 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
             return false;
         }
 
-        return !$this->isWeekendDay($date);
+        return ! $this->isWeekendDay($date);
     }
 
     public function isHoliday(\DateTimeInterface $date): bool
@@ -289,7 +289,7 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
      */
     private function isHolidayKeyNotEmpty(string $key): bool
     {
-        if (empty($key)) {
+        if ('' === $key) {
             throw new \InvalidArgumentException('Holiday key can not be blank.');
         }
 

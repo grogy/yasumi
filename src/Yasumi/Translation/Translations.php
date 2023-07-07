@@ -39,11 +39,11 @@ class Translations implements TranslationsInterface
      */
     public function loadTranslations(string $directoryPath): void
     {
-        if (!file_exists($directoryPath)) {
+        if (! file_exists($directoryPath)) {
             throw new \InvalidArgumentException('Directory with translations not found');
         }
 
-        $directoryPath = rtrim($directoryPath, '/\\').DIRECTORY_SEPARATOR;
+        $directoryPath = rtrim($directoryPath, '/\\').\DIRECTORY_SEPARATOR;
         $extension = 'php';
 
         foreach (new \DirectoryIterator($directoryPath) as $file) {
@@ -87,40 +87,24 @@ class Translations implements TranslationsInterface
     {
         $this->checkLocale($locale);
 
-        if (!\array_key_exists($key, $this->translations)) {
-            $this->translations[$key] = [];
-        }
-
         $this->translations[$key][$locale] = $translation;
     }
 
     /** {@inheritdoc} */
     public function getTranslation(string $key, string $locale): ?string
     {
-        if (!\array_key_exists($key, $this->translations)) {
-            return null;
-        }
-
-        if (!\array_key_exists($locale, $this->translations[$key])) {
-            return null;
-        }
-
-        return $this->translations[$key][$locale];
+        return $this->translations[$key][$locale] ?? null;
     }
 
     /** {@inheritdoc} */
     public function getTranslations(string $key): array
     {
-        if (!\array_key_exists($key, $this->translations)) {
-            return [];
-        }
-
-        return $this->translations[$key];
+        return $this->translations[$key] ?? [];
     }
 
     private function checkLocale(string $locale): void
     {
-        if (!\in_array($locale, $this->availableLocales, true)) {
+        if (! \in_array($locale, $this->availableLocales, true)) {
             throw new UnknownLocaleException(sprintf('Locale "%s" is not a valid locale.', $locale));
         }
     }

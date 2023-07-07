@@ -1,16 +1,8 @@
 {
   "name": "azuyalabs/yasumi",
-  "type": "library",
   "description": "The easy PHP Library for calculating holidays.",
   "license": "MIT",
-  "authors": [
-    {
-      "name": "Sacha Telgenhof",
-      "email": "me@sachatelgenhof.com",
-      "role": "Maintainer"
-    }
-  ],
-  "homepage": "https://www.yasumi.dev",
+  "type": "library",
   "keywords": [
     "bank",
     "calculation",
@@ -23,6 +15,14 @@
     "time"
   ],
   "readme": "README.md",
+  "authors": [
+    {
+      "name": "Sacha Telgenhof",
+      "email": "me@sachatelgenhof.com",
+      "role": "Maintainer"
+    }
+  ],
+  "homepage": "https://www.yasumi.dev",
   "support": {
     "issues": "https://github.com/azuyalabs/yasumi/issues",
     "source": "https://github.com/azuyalabs/yasumi",
@@ -34,30 +34,26 @@
       "url": "https://www.buymeacoffee.com/sachatelgenhof"
     }
   ],
-  "prefer-stable": true,
   "require": {
     "php": ">=8.0",
     "ext-json": "*"
   },
   "require-dev": {
+    "ext-intl": "*",
     "friends-of-phpspec/phpspec-code-coverage": "^6.1",
-    "phpspec/phpspec": "^7.2",
-    "friendsofphp/php-cs-fixer": "^2.19 | ^3.14",
-    "infection/infection": "^0.17 | ^0.26",
+    "friendsofphp/php-cs-fixer": "^2.19 || ^3.16",
+    "infection/infection": "^0.17 || ^0.26",
     "mikey179/vfsstream": "^1.6",
     "phan/phan": "^5.4",
+    "phpspec/phpspec": "^7.2",
     "phpstan/phpstan": "^1.10",
-    "phpunit/phpunit": "^8.5 | ^9.6",
-    "vimeo/psalm": "^5.7",
-    "ext-intl": "*"
+    "phpunit/phpunit": "^8.5 || ^9.6",
+    "vimeo/psalm": "^5.9"
   },
-  "config": {
-    "sort-packages": true,
-    "allow-plugins": {
-      "composer/package-versions-deprecated": true,
-      "infection/extension-installer": true
-    }
+  "suggest": {
+    "ext-calendar": "For calculating the date of Easter"
   },
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "Yasumi\\": "src/Yasumi/"
@@ -69,7 +65,18 @@
       "spec\\": "spec/"
     }
   },
+  "config": {
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true,
+      "infection/extension-installer": true
+    },
+    "sort-packages": true
+  },
   "scripts": {
+    "analyse": [
+      "@phpstan",
+      "@psalm"
+    ],
     "format": "./vendor/bin/php-cs-fixer fix",
     "infection": "vendor/bin/infection run -j 2",
     "phan": "vendor/bin/phan -C",
@@ -77,16 +84,9 @@
     "phpstan": "vendor/bin/phpstan analyse",
     "phpunit": "vendor/bin/phpunit",
     "psalm": "vendor/bin/psalm --threads=2",
-    "analyse": [
-      "@phpstan",
-      "@psalm"
-    ],
     "test": [
       "@phpspec",
       "@phpunit"
     ]
-  },
-  "suggest": {
-    "ext-calendar": "For calculating the date of Easter"
   }
 }

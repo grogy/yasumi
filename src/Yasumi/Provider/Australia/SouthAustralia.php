@@ -80,10 +80,16 @@ class SouthAustralia extends Australia
         string $locale,
         ?string $type = null
     ): Holiday {
+        $date = $this->calculateEaster($year, $timezone)->sub(new \DateInterval('P1D'));
+
+        if (! $date instanceof \DateTime) {
+            throw new \RuntimeException(sprintf('unable to perform a date subtraction for %s:%s', self::class, 'easterSaturday'));
+        }
+
         return new Holiday(
             'easterSaturday',
             ['en' => 'Easter Saturday'],
-            $this->calculateEaster($year, $timezone)->sub(new \DateInterval('P1D')),
+            $date,
             $locale,
             $type ?? Holiday::TYPE_OFFICIAL
         );
@@ -122,7 +128,7 @@ class SouthAustralia extends Australia
      */
     private function calculateLabourDay(): void
     {
-        $date = new \DateTime("first monday of october $this->year", DateTimeZoneFactory::getDateTimeZone($this->timezone));
+        $date = new \DateTime("first monday of october {$this->year}", DateTimeZoneFactory::getDateTimeZone($this->timezone));
 
         $this->addHoliday(new Holiday('labourDay', ['en' => 'Labour Day'], $date, $this->locale));
     }
@@ -161,7 +167,7 @@ class SouthAustralia extends Australia
      */
     private function calculateProclamationDay(): void
     {
-        $christmasDay = new \DateTime("$this->year-12-25", DateTimeZoneFactory::getDateTimeZone($this->timezone));
+        $christmasDay = new \DateTime("{$this->year}-12-25", DateTimeZoneFactory::getDateTimeZone($this->timezone));
 
         $this->addHoliday(new Holiday(
             'christmasDay',
