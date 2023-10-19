@@ -197,7 +197,7 @@ class Yasumi
     /**
      * Returns a list of available holiday providers.
      *
-     * @return array<string> list of available holiday providers
+     * @return array<string, array<array-key, string>|string|null> list of available holiday providers
      *
      * @throws \ReflectionException
      */
@@ -215,6 +215,7 @@ class Yasumi
             \FilesystemIterator::SKIP_DOTS
         ), \RecursiveIteratorIterator::SELF_FIRST);
 
+        /** @var \SplFileInfo $file */
         foreach ($filesIterator as $file) {
             if ($file->isDir()) {
                 continue;
