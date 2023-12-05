@@ -12,42 +12,44 @@ declare(strict_types=1);
  * @author Sacha Telgenhof <me at sachatelgenhof dot com>
  */
 
-namespace Yasumi\tests\Belgium;
+namespace Yasumi\tests\Mexico;
 
 use Yasumi\Holiday;
 use Yasumi\tests\HolidayTestCase;
 
 /**
- * Class for testing Easter in Belgium.
+ * Class containing tests for Epiphany in Mexico.
  */
-class EasterTest extends BelgiumBaseTestCase implements HolidayTestCase
+class EpiphanyTest extends MexicoBaseTestCase implements HolidayTestCase
 {
     /**
-     * The name of the holiday.
+     * The name of the holiday to be tested.
      */
-    public const HOLIDAY = 'easter';
+    public const HOLIDAY = 'epiphany';
 
     /**
-     * Tests Easter.
+     * Tests the holiday defined in this test.
+     *
+     * @dataProvider HolidayDataProvider
+     *
+     * @param int       $year     the year for which the holiday defined in this test needs to be tested
+     * @param \DateTime $expected the expected date
+     */
+    public function testHoliday(int $year, \DateTimeInterface $expected): void
+    {
+        $this->assertHoliday(self::REGION, self::HOLIDAY, $year, $expected);
+    }
+
+    /**
+     * Returns a list of random test dates used for assertion of the holiday defined in this test.
+     *
+     * @return array<array> list of test dates for the holiday defined in this test
      *
      * @throws \Exception
      */
-    public function testEaster(): void
+    public function HolidayDataProvider(): array
     {
-        $year = 2010;
-        $this->assertHoliday(
-            self::REGION,
-            self::HOLIDAY,
-            $year,
-            new \DateTime("{$year}-4-4", new \DateTimeZone(self::TIMEZONE))
-        );
-        $year = 2025;
-        $this->assertHoliday(
-            self::REGION,
-            self::HOLIDAY,
-            $year,
-            new \DateTime("{$year}-4-20", new \DateTimeZone(self::TIMEZONE))
-        );
+        return $this->generateRandomDates(1, 6, self::TIMEZONE);
     }
 
     /**
@@ -61,7 +63,7 @@ class EasterTest extends BelgiumBaseTestCase implements HolidayTestCase
             self::REGION,
             self::HOLIDAY,
             $this->generateRandomYear(),
-            [self::LOCALE => 'eerste paasdag']
+            [self::LOCALE => 'Día de Reyes']
         );
     }
 

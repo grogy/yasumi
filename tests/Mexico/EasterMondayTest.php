@@ -12,46 +12,39 @@ declare(strict_types=1);
  * @author Sacha Telgenhof <me at sachatelgenhof dot com>
  */
 
-namespace Yasumi\tests\France;
+namespace Yasumi\tests\Mexico;
 
 use Yasumi\Holiday;
 use Yasumi\tests\HolidayTestCase;
 
 /**
- * Class containing tests for Easter Monday in France.
+ * Class containing tests for Easter Monday in Mexico.
  */
-class EasterMondayTest extends FranceBaseTestCase implements HolidayTestCase
+class EasterMondayTest extends MexicoBaseTestCase implements HolidayTestCase
 {
     /**
-     * The name of the holiday.
+     * The name of the holiday to be tested.
      */
     public const HOLIDAY = 'easterMonday';
 
     /**
-     * Tests Easter Monday.
+     * Tests the holiday defined in this test.
      *
      * @throws \Exception
      */
-    public function testEasterMonday(): void
+    public function testHoliday(): void
     {
-        $year = 2016;
+        $year = 2216;
         $this->assertHoliday(
             self::REGION,
             self::HOLIDAY,
             $year,
-            new \DateTime("{$year}-3-28", new \DateTimeZone(self::TIMEZONE))
-        );
-        $year = 2025;
-        $this->assertHoliday(
-            self::REGION,
-            self::HOLIDAY,
-            $year,
-            new \DateTime("{$year}-4-21", new \DateTimeZone(self::TIMEZONE))
+            new \DateTime("{$year}-4-8", new \DateTimeZone(self::TIMEZONE))
         );
     }
 
     /**
-     * Tests translated name of Easter Monday.
+     * Tests translated name of the holiday defined in this test.
      *
      * @throws \Exception
      */
@@ -61,7 +54,7 @@ class EasterMondayTest extends FranceBaseTestCase implements HolidayTestCase
             self::REGION,
             self::HOLIDAY,
             $this->generateRandomYear(),
-            [self::LOCALE => 'Lundi de Pâques']
+            [self::LOCALE => 'Lunes de Pascua']
         );
     }
 
@@ -72,6 +65,6 @@ class EasterMondayTest extends FranceBaseTestCase implements HolidayTestCase
      */
     public function testHolidayType(): void
     {
-        $this->assertHolidayType(self::REGION, self::HOLIDAY, $this->generateRandomYear(), Holiday::TYPE_OFFICIAL);
+        $this->assertHolidayType(self::REGION, self::HOLIDAY, $this->generateRandomYear(), Holiday::TYPE_OBSERVANCE);
     }
 }

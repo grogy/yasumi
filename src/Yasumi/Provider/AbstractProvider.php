@@ -83,9 +83,6 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
      */
     private array $holidays = [];
 
-    /** global translations */
-    private ?TranslationsInterface $globalTranslations;
-
     /**
      * Creates a new holiday provider (i.e. country/state).
      *
@@ -97,13 +94,12 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
     public function __construct(
         int $year,
         ?string $locale = null,
-        ?TranslationsInterface $globalTranslations = null
+        private ?TranslationsInterface $globalTranslations = null
     ) {
         $this->clearHolidays();
 
         $this->year = $year ?: (int) date('Y');
         $this->locale = $locale ?? 'en_US';
-        $this->globalTranslations = $globalTranslations;
 
         $this->initialize();
     }
@@ -313,11 +309,8 @@ abstract class AbstractProvider implements \Countable, ProviderInterface, \Itera
      */
     private function anotherTime(int $year, string $key): ?Holiday
     {
-        $this->isHolidayKeyNotEmpty($key); // Validate if key is not empty
+        $this->isHolidayKeyNotEmpty($key);
 
-        // Get calling class name
-        $hReflectionClass = new \ReflectionClass(\get_class($this));
-
-        return Yasumi::create($hReflectionClass->getName(), $year, $this->locale)->getHoliday($key);
+        return Yasumi::create(static::class, $year, $this->locale)->getHoliday($key);
     }
 }
