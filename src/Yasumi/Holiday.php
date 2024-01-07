@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the Yasumi package.
  *
- * Copyright (c) 2015 - 2023 AzuyaLabs
+ * Copyright (c) 2015 - 2024 AzuyaLabs
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -207,7 +207,7 @@ class Holiday extends \DateTime implements \JsonSerializable
      * For each provided locale, return all locales including their parent locales. E.g.
      * ['ca_ES_VALENCIA', 'es_ES'] is expanded into ['ca_ES_VALENCIA', 'ca_ES', 'ca', 'es_ES', 'es'].
      *
-     * If a string is provided, return as if this string, Holiday::DEFAULT_LOCALE, and Holiday::LOCALE_SHORT_NAM
+     * If a string is provided, return as if this string, Holiday::DEFAULT_LOCALE, and Holiday::LOCALE_SHORT_NAME
      * was provided. E.g. 'de_DE' is expanded into ['de_DE', 'de', 'en_US', 'en', Holiday::LOCALE_KEY].
      *
      * If null is provided, return as if the display locale was provided as a string.

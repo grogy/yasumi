@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the Yasumi package.
  *
- * Copyright (c) 2015 - 2023 AzuyaLabs
+ * Copyright (c) 2015 - 2024 AzuyaLabs
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -214,13 +214,7 @@ class SouthKorea extends AbstractProvider
             return;
         }
 
-        if ($this->year < 2013) {
-            // Holidays in used from 1949 until 2012
-            $officialHolidays = $this->calculateBefore2013($this->year);
-        } else {
-            // Holidays in use from 2013
-            $officialHolidays = $this->calculateCurrent();
-        }
+        $officialHolidays = $this->year < 2013 ? $this->calculateBefore2013($this->year) : $this->calculateCurrent();
 
         foreach ($officialHolidays as $holiday) {
             $this->addHoliday($this->{$holiday}($this->year, $this->timezone, $this->locale));

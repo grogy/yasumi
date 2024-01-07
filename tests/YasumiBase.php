@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of the Yasumi package.
  *
- * Copyright (c) 2015 - 2023 AzuyaLabs
+ * Copyright (c) 2015 - 2024 AzuyaLabs
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -304,7 +304,7 @@ trait YasumiBase
      * Variations have been seen between different versions of PHP and OS distributions.
      * Likely this is caused by different editions of the tz database used in those releases.
      *
-     * The chosen delta is somewhat arbitray and seems to solve the experienced issues.
+     * The chosen delta is somewhat arbitrary and seems to solve the experienced issues.
      *
      * @throws \ExpectationFailedException
      */

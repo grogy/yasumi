@@ -4,7 +4,7 @@ declare(strict_types=1);
 /*
  * This file is part of the Yasumi package.
  *
- * Copyright (c) 2015 - 2023 AzuyaLabs
+ * Copyright (c) 2015 - 2024 AzuyaLabs
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,7 +18,7 @@ use Yasumi\Holiday;
 use Yasumi\tests\HolidayTestCase;
 
 /**
- * Class containing tests for Independece Day in Croatia.
+ * Class containing tests for Independence Day in Croatia.
  */
 class IndependenceDayTest extends CroatiaBaseTestCase implements HolidayTestCase
 {

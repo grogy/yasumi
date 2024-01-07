@@ -4,7 +4,7 @@ declare(strict_types=1);
 /*
  * This file is part of the Yasumi package.
  *
- * Copyright (c) 2015 - 2023 AzuyaLabs
+ * Copyright (c) 2015 - 2024 AzuyaLabs
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,7 +20,7 @@ use Yasumi\tests\HolidayTestCase;
 /**
  * Class for testing the Independence Day of Greece in Greece.
  */
-class IndepencenceDayTest extends GreeceBaseTestCase implements HolidayTestCase
+class IndependenceDayTest extends GreeceBaseTestCase implements HolidayTestCase
 {
     /**
      * The year in which the holiday was first established.

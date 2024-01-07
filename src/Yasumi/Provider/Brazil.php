@@ -1,10 +1,11 @@
 <?php
 
 declare(strict_types=1);
+
 /*
  * This file is part of the Yasumi package.
  *
- * Copyright (c) 2015 - 2023 AzuyaLabs
+ * Copyright (c) 2015 - 2024 AzuyaLabs
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -74,7 +75,7 @@ class Brazil extends AbstractProvider
      *
      * The Brazilian Proclamation of Republic was an act relevant military politic it happened on 15 November 1889
      * that initiated the build federative presidential of govern in Brazil, downed the monarchy constitutional
-     * parlamentary of Brazil's Empire.
+     * parliamentary of Brazil's Empire.
      *
      * @link https://en.wikipedia.org/wiki/Proclamation_of_the_Republic_(Brazil)
      */
