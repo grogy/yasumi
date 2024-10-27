@@ -74,13 +74,12 @@ class Bulgaria extends AbstractProvider
         //     'bs_Latn' => 'Nova godina - drugi dan',
         // ], new \DateTime("{$this->year}-01-02", DateTimeZoneFactory::getDateTimeZone($this->timezone)), $this->locale));
         //
-        // /*
-        //  * Second Labour day
-        //  */
-        // $this->addHoliday(new Holiday('secondLabourDay', [
-        //     'en' => 'Second Labour Day',
-        //     'bs_Latn' => 'Praznik rada - drugi dan',
-        // ], new \DateTime("{$this->year}-05-02", DateTimeZoneFactory::getDateTimeZone($this->timezone)), $this->locale));
+
+        if ($this->year >= 1990) {
+            $this->addHoliday(new Holiday('liberationDay', [
+                'bg' => 'Ден на Освобождението на България от османско иго',
+            ], new \DateTime("{$this->year}-03-03", DateTimeZoneFactory::getDateTimeZone($this->timezone)), $this->locale));
+        }
     }
 
     public function getSources(): array

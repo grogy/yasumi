@@ -27,11 +27,14 @@ class NewYearsDayTest extends BulgariaBaseTestCase implements HolidayTestCase
     /**
      * @dataProvider HolidayDataProvider
      */
-    public function testHoliday(int $year, \DateTimeInterface $expected): void
+    public function testHoliday(int $year, \DateTime $expected): void
     {
         $this->assertHoliday(self::REGION, self::HOLIDAY, $year, $expected);
     }
 
+    /**
+     * @return array<array<int, \DateTime>>
+     */
     public function HolidayDataProvider(): array
     {
         return $this->generateRandomDates(1, 1, self::TIMEZONE);
