@@ -81,6 +81,10 @@ class Bulgaria extends AbstractProvider
                 'bg' => 'Ден на Освобождението на България от османско иго',
             ], new \DateTime("{$this->year}-03-03", DateTimeZoneFactory::getDateTimeZone($this->timezone)), $this->locale));
         }
+
+        $this->addHoliday(new Holiday('stGeorgesDay', [
+            'bg' => 'Гергьовден, ден на храбростта и Българската армия',
+        ], new \DateTime("{$this->year}-05-06", DateTimeZoneFactory::getDateTimeZone($this->timezone)), $this->locale));
     }
 
     public function getSources(): array
