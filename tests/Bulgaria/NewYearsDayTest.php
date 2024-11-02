@@ -24,20 +24,15 @@ class NewYearsDayTest extends BulgariaBaseTestCase implements HolidayTestCase
 {
     public const HOLIDAY = 'newYearsDay';
 
-    /**
-     * @dataProvider HolidayDataProvider
-     */
-    public function testHoliday(int $year, \DateTime $expected): void
+    public function testHoliday(): void
     {
-        $this->assertHoliday(self::REGION, self::HOLIDAY, $year, $expected);
-    }
-
-    /**
-     * @return array<array<int, \DateTime>>
-     */
-    public function HolidayDataProvider(): array
-    {
-        return $this->generateRandomDates(1, 1, self::TIMEZONE);
+        $year = $this->generateRandomYear();
+        $this->assertHoliday(
+            self::REGION,
+            self::HOLIDAY,
+            $year,
+            new \DateTime("{$year}-01-01", new \DateTimeZone(self::TIMEZONE))
+        );
     }
 
     public function testTranslation(): void
@@ -52,6 +47,11 @@ class NewYearsDayTest extends BulgariaBaseTestCase implements HolidayTestCase
 
     public function testHolidayType(): void
     {
-        $this->assertHolidayType(self::REGION, self::HOLIDAY, $this->generateRandomYear(), Holiday::TYPE_OFFICIAL);
+        $this->assertHolidayType(
+            self::REGION,
+            self::HOLIDAY,
+            $this->generateRandomYear(),
+            Holiday::TYPE_OFFICIAL
+        );
     }
 }

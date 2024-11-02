@@ -32,7 +32,8 @@ class Bulgaria extends AbstractProvider
 
         // // Add common holidays
         $this->addHoliday($this->newYearsDay($this->year, $this->timezone, $this->locale));
-        // $this->addHoliday($this->internationalWorkersDay($this->year, $this->timezone, $this->locale));
+        $this->addHoliday($this->internationalWorkersDay($this->year, $this->timezone, $this->locale));
+
         //
         // // Add Catholic holidays
         // $this->addHoliday($this->easter($this->year, $this->timezone, $this->locale));

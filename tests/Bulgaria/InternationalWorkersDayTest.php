@@ -20,29 +20,18 @@ namespace Yasumi\tests\Bulgaria;
 use Yasumi\Holiday;
 use Yasumi\tests\HolidayTestCase;
 
-class LiberationDayTest extends BulgariaBaseTestCase implements HolidayTestCase
+class InternationalWorkersDayTest extends BulgariaBaseTestCase implements HolidayTestCase
 {
-    public const HOLIDAY = 'liberationDay';
-
-    private const ESTABLISHMENT_YEAR = 1990;
+    public const HOLIDAY = 'internationalWorkersDay';
 
     public function testHoliday(): void
     {
-        $year = $this->generateRandomYear(self::ESTABLISHMENT_YEAR);
+        $year = $this->generateRandomYear();
         $this->assertHoliday(
             self::REGION,
             self::HOLIDAY,
             $year,
-            new \DateTime("{$year}-03-03", new \DateTimeZone(self::TIMEZONE))
-        );
-    }
-
-    public function testNotHoliday(): void
-    {
-        $this->assertNotHoliday(
-            self::REGION,
-            self::HOLIDAY,
-            $this->generateRandomYear(1000, self::ESTABLISHMENT_YEAR - 1)
+            new \DateTime("{$year}-05-01", new \DateTimeZone(self::TIMEZONE))
         );
     }
 
@@ -51,8 +40,8 @@ class LiberationDayTest extends BulgariaBaseTestCase implements HolidayTestCase
         $this->assertTranslatedHolidayName(
             self::REGION,
             self::HOLIDAY,
-            $this->generateRandomYear(self::ESTABLISHMENT_YEAR),
-            [self::LOCALE => 'Ден на Освобождението на България от османско иго']
+            $this->generateRandomYear(),
+            [self::LOCALE => 'Ден на труда и на международната работническа солидарност']
         );
     }
 
@@ -61,7 +50,7 @@ class LiberationDayTest extends BulgariaBaseTestCase implements HolidayTestCase
         $this->assertHolidayType(
             self::REGION,
             self::HOLIDAY,
-            $this->generateRandomYear(self::ESTABLISHMENT_YEAR),
+            $this->generateRandomYear(),
             Holiday::TYPE_OFFICIAL
         );
     }

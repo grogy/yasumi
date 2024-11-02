@@ -33,6 +33,7 @@ class BulgariaTest extends BulgariaBaseTestCase implements ProviderTestCase
     {
         $holidays = [
             'newYearsDay',
+            'internationalWorkersDay',
         ];
 
         if ($this->year >= 1990) {
